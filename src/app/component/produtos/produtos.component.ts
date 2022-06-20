@@ -14,30 +14,44 @@ export class ProdutosComponent implements OnInit {
   tituloFormulario: string;
   produtos : Produto[];
 
+  visibilidadeTabela: boolean = true;
+  visibilidadeFormulario: boolean = false;
+
   constructor(private produtosService: ProdutosService) { }
 
   ngOnInit(): void {
-    this.produtosService.PegarTodos().subscribe(resultado =>{
-      this.produtos = resultado;
-    });
-
-    this.tituloFormulario = 'Novo Cadastro de Produto';
-
-    this.formulario = new FormGroup({
-      nome: new FormControl(null),
-      categoria: new FormControl(null),
-      descricao: new FormControl(null),
-      preco: new FormControl(null),
-      quantidade: new FormControl(null),
-      imagemUrl: new FormControl(null)
-    });
+    this.produtosService.PegarTodos().subscribe(resultado =>
+      this.produtos = resultado);
   }
+
+    ExibirFormularioCadastro(): void{
+      this.visibilidadeTabela=false;
+      this.visibilidadeFormulario=true;
+
+      this.tituloFormulario = 'Novo Cadastro de Produto';
+      this.formulario = new FormGroup({
+        nome: new FormControl(null),
+        categoria: new FormControl(null),
+        descricao: new FormControl(null),
+        preco: new FormControl(null),
+        quantidade: new FormControl(null),
+        imagemUrl: new FormControl(null) 
+      });
+    }
 
   EnviarFormulario(): void{
     const produto: Produto = this.formulario.value;
-    this.produtosService.SalvarProduto(produto).subscribe(
-      (resultado) =>{alert('pessoa inserida com sucesso')}
-    )
+    this.produtosService.SalvarProduto(produto).subscribe((resultado) => {
+      this.visibilidadeTabela=true;
+      this.visibilidadeFormulario=false;
+      alert('pessoa inserida com sucesso');
+      this.produtosService.PegarTodos().subscribe(registros=> { this.produtos = registros})
+    });
   }
 
+  voltar() : void{
+    this.visibilidadeTabela=true;
+    this.visibilidadeFormulario=false;
+  }
 }
+

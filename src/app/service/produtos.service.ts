@@ -3,8 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Produto } from '../Produto';
 
-const httpOptions ={
-  headers: new HttpHeaders({
+const httpOptions ={headers: new HttpHeaders({
     'content-type': 'application/json'
   })
 }
@@ -14,7 +13,7 @@ const httpOptions ={
 })
 export class ProdutosService {
 
-  url: 'https://localhost:7248/api/Produtos';
+  url= 'https://localhost:7248/api/Produtos';
 
   constructor(private http: HttpClient) { }
 

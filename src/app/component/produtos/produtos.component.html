@@ -1,6 +1,35 @@
-<div class="container">
+<div class="container" *ngIf="visibilidadeTabela">
+    <div class="border border-light rounded p-5">
+        <div>
+            <button type="button" class="btn btn-sm btn-secondary" 
+            (click)="ExibirFormularioCadastro()">Novo Produto</button>
+        </div>
+    </div>
+    <table class="table table-striped table-hover table-sm " *ngIf="produtos">
+        <tr class="thead-light">
+            <th>Nome</th>
+            <th>Categoria</th>
+            <th>Descrição</th>
+            <th>Preço</th>
+            <th>quantidade</th>
+            <th>Imagem</th>
+        </tr>
+        <tr *ngFor="let produto of produtos">
+            <td>{{ produto.nome }}</td>
+            <td>{{ produto.categoria }}</td>
+            <td>{{ produto.descricao }}</td>
+            <td>{{ produto.preco }}</td>
+            <td>{{ produto.quantidade }}</td>
+            <td><img src="{{ produto.imagemUrl}}" width="50"></td>
+            <button type="button" class="bt btn-sm">Atualizar</button>
+            <button type="button" class="bt btn-sm">Excluir</button>
+        </tr>
+    </table>
+</div>
+
+<div class="container" *ngIf="visibilidadeFormulario">
     <div class="row">
-        <div class="col-6 border dorder-light rounded p-6 shadow" *ngIf="formulario">
+        <div class="col-6 border dorder-light rounded p-5 shadow" *ngIf="formulario">
             <h4>{{ tituloFormulario }}</h4>
             <hr>
             <form [formGroup] = "formulario" (ngSubmit)="EnviarFormulario()">
@@ -31,22 +60,12 @@
                 <div class="container">
                     <div class="row">
                         <div>
-                            <button type="submit" class="btn btn-primary">Salvar</button>
-                            <button type="button" class="btn btn-primary">Voltar</button>
+                            <button type="subimt" class="btn btn-primary">Salvar</button>
+                            <button type="button" class="btn btn-secondary"(click)="voltar()">Voltar</button>
                         </div>
                     </div>
                 </div>
             </form>
         </div>
-
-
-    </div>
-
-    <div class="row col-md-12">
-        <div class="col-md-4 col-md-3 me-3" style="width: 15rem; height: 18rem;">
-
-
-        </div>
-
     </div>
 </div>
