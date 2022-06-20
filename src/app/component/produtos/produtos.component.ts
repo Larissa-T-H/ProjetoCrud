@@ -53,5 +53,14 @@ export class ProdutosComponent implements OnInit {
     this.visibilidadeTabela=true;
     this.visibilidadeFormulario=false;
   }
+
+  ExcluirProduto(produtoId) {
+    this.produtosService.ExcluirProduto(produtoId).subscribe((resultado) =>{
+      this.visibilidadeTabela=true;
+      this.visibilidadeFormulario=false;
+      alert('Excluido com sucesso');
+      this.produtosService.PegarTodos().subscribe(registro =>{this.produtos = registro});
+    });
+  }
 }
 

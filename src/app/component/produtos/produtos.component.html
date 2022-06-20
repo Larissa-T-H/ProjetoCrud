@@ -22,7 +22,7 @@
             <td>{{ produto.quantidade }}</td>
             <td><img src="{{ produto.imagemUrl}}" width="50"></td>
             <button type="button" class="bt btn-sm">Atualizar</button>
-            <button type="button" class="bt btn-sm">Excluir</button>
+            <button type="button" class="bt btn-sm" (click)="ExcluirProduto(produto.produtoId)">Excluir</button>
         </tr>
     </table>
 </div>
